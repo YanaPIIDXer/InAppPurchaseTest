@@ -16,8 +16,8 @@ public class StoreListener : IStoreListener
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="productPurchase">商品購入インタフェース</param>
-    public StoreListener(IProductPurchase productPurchase)
+    /// <param name="ProductPurchase">商品購入インタフェース</param>
+    public StoreListener(IProductPurchase ProductPurchase)
     {
         this.ProductPurchase = ProductPurchase;
     }
