@@ -24,6 +24,9 @@ public class TitleSequence : MonoBehaviour
                 return;
             }
 
+            UserData.Instance.Gold = Result.gold;
+            UserData.Instance.SPMode = Result.sp_mode;
+
             SceneManager.LoadScene("Menu");
         }));
     }
