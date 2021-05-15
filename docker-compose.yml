@@ -1,9 +1,0 @@
-version: "3.0"
-services:
-    server:
-        build: ./Server
-        ports:
-            - 80:80
-        volumes:
-            - ./Server/html:/var/www/html
-            
