@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +20,15 @@ public class SimpleDialog : MonoBehaviour
     private static GameObject Prefab = null;
 
     /// <summary>
+    /// コールバック
+    /// </summary>
+    private Action Callback = null;
+
+    /// <summary>
     /// 表示
     /// </summary>
     /// <param name="DisplayText">表示文字列</param>
-    public static void Show(string DisplayText)
+    public static void Show(string DisplayText, Action Callback = null)
     {
         if (Prefab == null)
         {
@@ -33,6 +39,7 @@ public class SimpleDialog : MonoBehaviour
         var Obj = Instantiate<GameObject>(Prefab);
         var Dialog = Obj.GetComponent<SimpleDialog>();
         Dialog.DisplayText.text = DisplayText;
+        Dialog.Callback = Callback;
 
         UIManager.Instance.Add(Obj.transform, EUIStack.Front);
     }
@@ -49,5 +56,6 @@ public class SimpleDialog : MonoBehaviour
     public void OnPressedOKButton()
     {
         Destroy(gameObject);
+        Callback?.Invoke();
     }
 }
