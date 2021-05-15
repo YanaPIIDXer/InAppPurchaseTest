@@ -55,7 +55,7 @@ class PurchaseController < ApplicationController
     uri = URI.parse("https://sandbox.itunes.apple.com/verifyReceipt")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    params = {"receipt-data": payload, password: "password"}
+    params = {"receipt-data": payload, password: <%= ENV['APPSTORE_SECRET_KEY'] %>}
     header = {"Content-Type"=> "application/json"}
     response = http.post(uri.path, params.to_json(), header)
     return response.body["status"] == 0
