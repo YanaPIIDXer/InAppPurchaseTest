@@ -14,7 +14,13 @@ public class PurchaseSequence : ProductPurchaseBehaviour
     /// </summary>
     public void BuyGoldItem()
     {
-        StoreController.InitiatePurchase(ProductIDs.AddMoneyItem);
+        YesNoDialog.Show("購入しますか？", (Result) =>
+        {
+            if (Result)
+            {
+                StoreController.InitiatePurchase(ProductIDs.AddMoneyItem);
+            }
+        });
     }
 
     /// <summary>
