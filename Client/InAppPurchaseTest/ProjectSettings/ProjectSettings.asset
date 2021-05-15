@@ -632,10 +632,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 66271424-9eeb-4347-a94c-b9223e4009bd
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: InAppPurchaseTest
+  organizationId: yanapiidxer
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
