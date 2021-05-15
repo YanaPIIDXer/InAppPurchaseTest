@@ -16,7 +16,7 @@ class LoginController < ApplicationController
 
         response[:result] = true
         response[:gold] = user.gold
-        response[:sp_mode] = user.sp_mode
+        response[:sp_mode] = user.purchases.find_by(item_kind: 1) != nil
 
         render :json => response
     end
