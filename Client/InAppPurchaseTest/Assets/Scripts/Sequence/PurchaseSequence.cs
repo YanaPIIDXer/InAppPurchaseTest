@@ -42,10 +42,12 @@ public class PurchaseSequence : ProductPurchaseBehaviour
                     if (!Result.success)
                     {
                         Debug.LogError("Verify Error...");
+                        SimpleDialog.Show("購入エラー");
                         return;
                     }
                     UserData.Instance.Gold = Result.gold;
                     StoreController.ConfirmPendingPurchase(StoreController.products.WithID(ProductIDs.AddMoneyItem));
+                    SimpleDialog.Show("購入しました。");
                 }));
                 break;
         }
