@@ -67,11 +67,13 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.5.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     mysql2 (0.5.3)
     nio4r (2.5.7)
-    nokogiri (1.11.4-x86_64-linux)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     puma (3.12.6)
     racc (1.5.2)
@@ -134,6 +136,7 @@ DEPENDENCIES
   byebug
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4, < 0.6.0)
+  nokogiri
   puma (~> 3.11)
   rails (~> 5.2.6)
   spring
