@@ -11,7 +11,7 @@ class PurchaseController < ApplicationController
   end
 
   def check_session
-    if session[:id] != nil
+    if session[:id] == nil
       redirect_to action: :session_fail
     end
   end
