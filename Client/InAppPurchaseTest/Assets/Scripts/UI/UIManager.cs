@@ -82,6 +82,7 @@ public class UIHandler
         this.UITransform = UITransform;
         this.ParentTransform = ParentTransform;
         this.UITransform.SetParent(ParentTransform);
+        this.UITransform.localPosition = Vector3.zero;
     }
 
     /// <summary>

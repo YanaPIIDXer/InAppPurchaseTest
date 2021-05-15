@@ -15,6 +15,7 @@ public class StoreListener : IStoreListener
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
+        SimpleDialog.Show("ストアの初期化に失敗しました。\nReasion:" + error.ToString());
         Debug.LogError("Store Initialize Failed.");
         Debug.LogError("Reason:" + error.ToString());
     }
