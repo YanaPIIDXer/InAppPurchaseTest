@@ -2,8 +2,8 @@ class PurchaseController < ApplicationController
   before_action :check_session
   skip_before_action :check_session, only: [:session_fail]
   
-  def add_money
-    render :json => { success: true, money: 9999 }
+  def add_gold
+    render :json => { success: true, gold: 9999 }
   end
 
   def session_fail

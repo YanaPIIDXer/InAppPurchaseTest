@@ -11,22 +11,22 @@ public static class ProductIDs
     /// <summary>
     /// 金を増やすアイテム
     /// </summary>
-    public static readonly string AddMoneyItem = "item1";
+    public const string AddMoneyItem = "item1";
 
     /// <summary>
     /// SPモードフラグアイテム
     /// </summary>
-    public static readonly string SPModeItem = "item2";
+    public const string SPModeItem = "item2";
 
     /// <summary>
     /// ログボ権解禁アイテム
     /// </summary>
-    public static readonly string LoginBonusItem = "item3";
+    public const string LoginBonusItem = "item3";
 
     /// <summary>
     /// 消耗型アイテムによる金増加量UPアイテム
     /// </summary>
-    public static readonly string AddMoneyBoostItem = "item4";
+    public const string AddMoneyBoostItem = "item4";
 }
 
 /// <summary>

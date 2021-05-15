@@ -18,23 +18,6 @@ public class PurchaseSequence : ProductPurchaseBehaviour
     }
 
     /// <summary>
-    /// 購入情報
-    /// </summary>
-    [Serializable]
-    private struct PurchaseInfo
-    {
-        /// <summary>
-        /// ストア
-        /// </summary>
-        public string Store;
-
-        /// <summary>
-        /// ペイロード
-        /// </summary>
-        public string Payload;
-    }
-
-    /// <summary>
     /// 商品を購入した
     /// </summary>
     /// <param name="PurchaseEvent">購入イベント情報</param>
@@ -43,5 +26,21 @@ public class PurchaseSequence : ProductPurchaseBehaviour
         PurchaseInfo Info = JsonUtility.FromJson<PurchaseInfo>(PurchaseEvent.purchasedProduct.receipt);
         Debug.Log("Store:" + Info.Store);
         Debug.Log("Payload:" + Info.Payload);
+
+        switch (PurchaseEvent.purchasedProduct.definition.id)
+        {
+            case ProductIDs.AddMoneyItem:
+
+                StartCoroutine(APICall.VerifyAddGoldPurchase(Info, (Result) =>
+                {
+                    if (!Result.success)
+                    {
+                        Debug.LogError("Verify Error...");
+                        return;
+                    }
+                    UserData.Instance.Gold = Result.gold;
+                }));
+                break;
+        }
     }
 }
