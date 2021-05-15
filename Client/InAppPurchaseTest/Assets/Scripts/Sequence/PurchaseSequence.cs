@@ -39,6 +39,7 @@ public class PurchaseSequence : ProductPurchaseBehaviour
                         return;
                     }
                     UserData.Instance.Gold = Result.gold;
+                    StoreController.ConfirmPendingPurchase(StoreController.products.WithID(ProductIDs.AddMoneyItem));
                 }));
                 break;
         }
