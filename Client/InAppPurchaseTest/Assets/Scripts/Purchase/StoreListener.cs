@@ -45,6 +45,6 @@ public class StoreListener : IStoreListener
     {
         Debug.Log("Purchase ID:" + purchaseEvent.purchasedProduct.definition.id);
         ProductPurchase.OnPurchaseProduct(purchaseEvent);
-        return PurchaseProcessingResult.Complete;
+        return purchaseEvent.purchasedProduct.definition.type != ProductType.Consumable ? PurchaseProcessingResult.Complete : PurchaseProcessingResult.Pending;
     }
 }
