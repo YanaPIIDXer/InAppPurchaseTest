@@ -18,6 +18,7 @@ public class Store : MonoBehaviour
         var PurchaseModule = StandardPurchasingModule.Instance();
         PurchaseModule.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
         var Builder = ConfigurationBuilder.Instance(PurchaseModule);
+        Builder.AddProducts(Products.StoreProducts);
         UnityPurchasing.Initialize(Listener, Builder);
     }
 }

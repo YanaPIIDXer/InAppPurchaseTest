@@ -10,6 +10,7 @@ public class StoreListener : IStoreListener
 {
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
+        Debug.Log("Store Initialize Success.");
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
