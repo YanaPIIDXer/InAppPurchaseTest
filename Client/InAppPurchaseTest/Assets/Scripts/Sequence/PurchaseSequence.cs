@@ -13,7 +13,6 @@ public class PurchaseSequence : ProductPurchaseBehaviour
     /// </summary>
     public void BuyGoldItem()
     {
-        var Prod = StoreController.products.WithID(ProductIDs.AddMoneyItem);
-        Debug.Log(Prod.metadata.localizedPriceString);
+        StoreController.InitiatePurchase(ProductIDs.AddMoneyItem);
     }
 }
