@@ -44,6 +44,7 @@ public class StoreListener : IStoreListener
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
     {
         Debug.Log("Purchase ID:" + purchaseEvent.purchasedProduct.definition.id);
+        ProductPurchase.OnPurchaseProduct(purchaseEvent);
         return PurchaseProcessingResult.Complete;
     }
 }
