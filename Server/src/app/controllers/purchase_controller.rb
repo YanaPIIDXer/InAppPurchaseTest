@@ -3,7 +3,21 @@ class PurchaseController < ApplicationController
   skip_before_action :check_session, only: [:session_fail]
   
   def add_gold
-    render :json => { success: true, gold: 9999 }
+    store = params["Store"]
+    verify = false
+    if store == "fake" then
+      verify = true
+    end
+
+    user = User.find_by(id: session[:id])
+    gold = user.gold
+    if verify then
+      user.gold += 100
+      gold = user.gold
+      user.save()
+    end
+
+    render :json => { success: verify, gold: gold }
   end
 
   def session_fail
