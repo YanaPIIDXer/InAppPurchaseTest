@@ -1,0 +1,68 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to ECS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push container image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
+        run: |
+          docker build -t simple_social_game_server --build-arg PRODUCTION_DATABASE_PASSWORD=${{ secrets.PRODUCTION_DATABASE_PASSWORD }} --build-arg SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} ./Server
+          docker tag simple_social_game_server:latest $ECR_REPOSITORY:latest
+          docker push $ECR_REPOSITORY:latest
+
+      - name: Render task definition
+        id: render-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: AWS/task-definition.json
+          container-name: server
+          image: ${{ secrets.AWS_ECR_REPO_NAME }}:latest
+
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-container.outputs.task-definition }}
+          service: InAppPurchaseTest
+          cluster: InAppPurchaseTest
+
+      - name: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1
+        with:
+          version: 2.0.33
+
+      - name: Create Database
+        run: |
+          aws ecs run-task --region ap-northeast-1 \
+            --cluster InAppPurchaseTest \
+            --task-definition InAppPurchaseTest \
+            --overrides file://AWS/run_task_db_create.json
+
+      - name: Migrate Database
+        run: |
+          aws ecs run-task --region ap-northeast-1 \
+            --cluster InAppPurchaseTest \
+            --task-definition InAppPurchaseTest \
+            --overrides file://AWS/run_task_db_migrate.json
