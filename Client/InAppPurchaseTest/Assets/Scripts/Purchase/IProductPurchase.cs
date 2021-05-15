@@ -13,3 +13,15 @@ public interface IProductPurchase
     /// </summary>
     IStoreController StoreController { set; }
 }
+
+/// <summary>
+/// IProductPurchaseのMonoBehaviour版
+/// interfaceはSerializeFieldでインスペクタから渡せないようなので
+/// </summary>
+public abstract class ProductPurchaseBehaviour : MonoBehaviour, IProductPurchase
+{
+    /// <summary>
+    /// ストアコントローラ
+    /// </summary>
+    public IStoreController StoreController { set; protected get; }
+}

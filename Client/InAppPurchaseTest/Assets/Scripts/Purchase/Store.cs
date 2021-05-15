@@ -9,9 +9,10 @@ using UnityEngine.Purchasing;
 public class Store : MonoBehaviour
 {
     /// <summary>
-    /// イベントリスナ
+    /// 商品購入インタフェース
     /// </summary>
-    private StoreListener Listener = new StoreListener();
+    [SerializeField]
+    private ProductPurchaseBehaviour ProductPurchase = null;
 
     void Awake()
     {
@@ -19,6 +20,6 @@ public class Store : MonoBehaviour
         PurchaseModule.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
         var Builder = ConfigurationBuilder.Instance(PurchaseModule);
         Builder.AddProducts(Products.StoreProducts);
-        UnityPurchasing.Initialize(Listener, Builder);
+        UnityPurchasing.Initialize(new StoreListener(ProductPurchase), Builder);
     }
 }

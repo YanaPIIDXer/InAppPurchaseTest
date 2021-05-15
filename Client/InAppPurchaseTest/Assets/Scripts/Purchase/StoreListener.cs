@@ -8,9 +8,24 @@ using UnityEngine.Purchasing;
 /// </summary>
 public class StoreListener : IStoreListener
 {
+    /// <summary>
+    /// 商品購入インタフェース
+    /// </summary>
+    private IProductPurchase ProductPurchase = null;
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="productPurchase">商品購入インタフェース</param>
+    public StoreListener(IProductPurchase productPurchase)
+    {
+        this.ProductPurchase = ProductPurchase;
+    }
+
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         Debug.Log("Store Initialize Success.");
+        ProductPurchase.StoreController = controller;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
