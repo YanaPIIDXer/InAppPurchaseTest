@@ -4,6 +4,32 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 
 /// <summary>
+/// 商品ＩＤの定数定義
+/// </summary>
+public static class ProductIDs
+{
+    /// <summary>
+    /// 金を増やすアイテム
+    /// </summary>
+    public static readonly string AddMoneyItem = "item1";
+
+    /// <summary>
+    /// SPモードフラグアイテム
+    /// </summary>
+    public static readonly string SPModeItem = "item2";
+
+    /// <summary>
+    /// ログボ権解禁アイテム
+    /// </summary>
+    public static readonly string LoginBonusItem = "item3";
+
+    /// <summary>
+    /// 消耗型アイテムによる金増加量UPアイテム
+    /// </summary>
+    public static readonly string AddMoneyBoostItem = "item4";
+}
+
+/// <summary>
 /// 商品情報
 /// </summary>
 public class Products
@@ -23,10 +49,10 @@ public class Products
     /// </summary>
     private void Initialize()
     {
-        ProductList.Add(new ProductDefinition("item1", ProductType.Consumable));
-        ProductList.Add(new ProductDefinition("item2", ProductType.NonConsumable));
-        ProductList.Add(new ProductDefinition("item3", ProductType.Subscription));
-        ProductList.Add(new ProductDefinition("item4", ProductType.Subscription));
+        ProductList.Add(new ProductDefinition(ProductIDs.AddMoneyItem, ProductType.Consumable));
+        ProductList.Add(new ProductDefinition(ProductIDs.SPModeItem, ProductType.NonConsumable));
+        ProductList.Add(new ProductDefinition(ProductIDs.LoginBonusItem, ProductType.Subscription));
+        ProductList.Add(new ProductDefinition(ProductIDs.AddMoneyBoostItem, ProductType.Subscription));
     }
 
     #region Singleton
